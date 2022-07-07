@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity(), Communicator {
         return bundle
     }
 
-    fun createFrag(bundle: Bundle, fragment: Fragment):Fragment{
+    fun createFrag(editTextInput: String, fragment: Fragment):Fragment{
+        val bundle = createBundle(editTextInput)
         fragment.arguments = bundle
         return fragment
     }
@@ -28,8 +29,7 @@ class MainActivity : AppCompatActivity(), Communicator {
     }
 
     override fun replaceFragmentWithData(editTextInput: String, fragment: Fragment) {
-        val bundle = createBundle(editTextInput)
-        val fragment = createFrag(bundle, fragment)
-        replaceFragment(fragment)
+        var modifiedFrag = createFrag(editTextInput, fragment)
+        replaceFragment(modifiedFrag)
     }
 }

@@ -13,19 +13,12 @@ import kotlinx.android.synthetic.main.fragment1.view.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 class Fragment1 : Fragment() {
-//    private lateinit var communicator: Communicator
-//    var msg: String? = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
-
-        val view =  inflater.inflate(R.layout.fragment1, container, false)
-
-//        msg = arguments?.getString("message")
-//        view.textView1.text = msg
+      val view =  inflater.inflate(R.layout.fragment1, container, false)
         view.buttonTo2.setOnClickListener {
             (activity as Communicator).replaceFragmentWithData(view.editText1.text.toString(), Fragment2())
         }
