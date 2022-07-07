@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 
 import kotlinx.android.synthetic.main.fragment1.view.*
+import kotlinx.android.synthetic.main.fragment_2.view.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 class Fragment1 : Fragment() {
 
@@ -19,12 +18,16 @@ class Fragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
       val view =  inflater.inflate(R.layout.fragment1, container, false)
-        view.buttonTo2.setOnClickListener {
-            (activity as Communicator).replaceFragmentWithData(view.editText1.text.toString(), Fragment2())
-        }
+        addBtn2Listener(view)
         return view
     }
 
+    fun addBtn2Listener(view: View){
+//        view.buttonTo2.setOnClickListener {(activity as Communicator).replaceFragmentWithData(view.editText1.text.toString(), Fragment2()) }
+        view.buttonTo2.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_to_fragment2)
+        }
+    }
 
 
 }
