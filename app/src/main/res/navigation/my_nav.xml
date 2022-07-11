@@ -12,8 +12,7 @@
         tools:layout="@layout/fragment1" >
         <action
             android:id="@+id/action_fragment1_to_fragment2"
-            app:destination="@id/fragment2"
-            app:enterAnim="@android:anim/slide_in_left" />
+            app:destination="@id/fragment2" />
     </fragment>
     <fragment
         android:id="@+id/fragment2"
@@ -22,8 +21,7 @@
         tools:layout="@layout/fragment_2" >
         <action
             android:id="@+id/action_fragment2_to_fragment1"
-            app:destination="@id/fragment1"
-            app:enterAnim="@android:anim/slide_out_right" />
+            app:destination="@id/fragment1" />
         <argument
             android:name="message"
             app:argType="string" />

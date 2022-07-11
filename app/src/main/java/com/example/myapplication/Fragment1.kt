@@ -18,14 +18,16 @@ class Fragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
       val view =  inflater.inflate(R.layout.fragment1, container, false)
-        addBtn2Listener(view)
+        addBtn1Listener(view)
         return view
     }
 
-    fun addBtn2Listener(view: View){
+    fun addBtn1Listener(view: View){
 //        view.buttonTo2.setOnClickListener {(activity as Communicator).replaceFragmentWithData(view.editText1.text.toString(), Fragment2()) }
         view.buttonTo2.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_to_fragment2)
+            val action = Fragment1Directions.actionFragment1ToFragment2(view.editText1.text.toString())
+            Navigation.findNavController(view).navigate(action)
+
         }
     }
 
