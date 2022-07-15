@@ -1,55 +1,58 @@
 package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment1.*
 import kotlinx.android.synthetic.main.fragment_2.*
+import kotlinx.coroutines.*
 
-class MainActivity : AppCompatActivity()/*, Communicator */{
-    lateinit var s1 : Array<String>
-    lateinit var s2 : Array<String>
-    val imgs = listOf<Int>(
-        androidx.customview.R.drawable.notification_bg, androidx.constraintlayout.widget.R.drawable.abc_ab_share_pack_mtrl_alpha,
-    androidx.viewpager.R.drawable.notification_bg, androidx.constraintlayout.widget.R.drawable.notification_bg, androidx.appcompat.R.drawable.abc_ic_go_search_api_material,
-        androidx.constraintlayout.widget.R.drawable.notification_bg, androidx.transition.R.drawable.abc_btn_check_to_on_mtrl_000, androidx.constraintlayout.widget.R.drawable.abc_spinner_textfield_background_material,
-        androidx.constraintlayout.widget.R.drawable.notification_bg, androidx.appcompat.R.drawable.abc_edit_text_material)
+class MainActivity : AppCompatActivity(){
+    val Tag = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        s1 = resources.getStringArray(R.array.programming_languages)
-        s2 = resources.getStringArray(R.array.description)
 
 
-        val adapter = Adapter(this, s1, s2, imgs)
+        val job = GlobalScope.launch(Dispatchers.Default) {
 
-        recycleView.adapter = adapter
-        recycleView.layoutManager  = LinearLayoutManager(this)
+            Log.d(Tag, "Start Long running application ${Thread.currentThread().name} ")
+            withTimeout(3000L){//terminates couroutine if it takes more than 3 seconds
+                for (i in 30..50){
+                    if (isActive)
+                        Log.d(Tag, "Result of Fib for  $i : ${fib(i)}")
+                }
+            }
+
+            Log.d(Tag, "End Long running application ${Thread.currentThread().name} ")
+        }
 
 
-//      val frag1  = Fragmnet1()
-//        replaceFragment(frag1)
+
+//        runBlocking { //This will block the thread -> used to call suspend functions
+//            delay(2000L)
+//            job.cancel()
+//            Log.d(Tag, "Cancelling Coroutine ${Thread.currentThread().name} ")
+//        }
     }
 
+    private fun fib(i: Int): Long {
+        return when (i) {
+            0 -> 0
+            1 -> 1
+            else -> fib(i - 1) + fib(i - 2)
+        }
+    }
 
-//    fun createBundle(txt: String): Bundle{
-//        val bundle = Bundle()
-//        bundle.putString("message",txt)
-//        return bundle
-//    }
-//
-//    fun createFrag(editTextInput: String, fragment: Fragment):Fragment{
-//        val bundle = createBundle(editTextInput)
-//        fragment.arguments = bundle
-//        return fragment
-//    }
-//    fun replaceFragment(fragment: Fragment){
-//        supportFragmentManager.beginTransaction().replace(R.id.frag, fragment).commit()
-//    }
-//
-//    override fun replaceFragmentWithData(editTextInput: String, fragment: Fragment) {
-//        var modifiedFrag = createFrag(editTextInput, fragment)
-//        replaceFragment(modifiedFrag)
-//    }
+    suspend fun doNetworkCall():String{
+        delay(1000L)
+        return "Hello"
+    }
+    suspend fun doNetworkCall2():String{
+        delay(1000L)
+        return "Hello"
+    }
+
 }
