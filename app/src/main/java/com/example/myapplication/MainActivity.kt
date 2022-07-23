@@ -1,58 +1,37 @@
 package com.example.myapplication
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment1.*
 import kotlinx.android.synthetic.main.fragment_2.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.zip
 
-class MainActivity : AppCompatActivity(){
-    val Tag = "MainActivity"
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        val job = GlobalScope.launch(Dispatchers.Default) {
-
-            Log.d(Tag, "Start Long running application ${Thread.currentThread().name} ")
-            withTimeout(3000L){//terminates couroutine if it takes more than 3 seconds
-                for (i in 30..50){
-                    if (isActive)
-                        Log.d(Tag, "Result of Fib for  $i : ${fib(i)}")
-                }
-            }
-
-            Log.d(Tag, "End Long running application ${Thread.currentThread().name} ")
-        }
-
-
-
-//        runBlocking { //This will block the thread -> used to call suspend functions
-//            delay(2000L)
-//            job.cancel()
-//            Log.d(Tag, "Cancelling Coroutine ${Thread.currentThread().name} ")
-//        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    private fun fib(i: Int): Long {
-        return when (i) {
-            0 -> 0
-            1 -> 1
-            else -> fib(i - 1) + fib(i - 2)
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        val navConroller = findNavController(R.id.fragmentContainerView)
+        return super.onSupportNavigateUp() || navConroller.navigateUp()
     }
-
-    suspend fun doNetworkCall():String{
-        delay(1000L)
-        return "Hello"
-    }
-    suspend fun doNetworkCall2():String{
-        delay(1000L)
-        return "Hello"
-    }
-
 }

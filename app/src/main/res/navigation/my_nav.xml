@@ -3,29 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/fragment1">
-
+    app:startDestination="@id/listFragment">
     <fragment
-        android:id="@+id/fragment1"
-        android:name="com.example.myapplication.Fragment1"
+        android:id="@+id/listFragment"
+        android:name="com.example.myapplication.list.ListFragment"
         android:label="fragment1"
         tools:layout="@layout/fragment1" >
         <action
-            android:id="@+id/action_fragment1_to_fragment2"
-            app:destination="@id/fragment2"
-            app:enterAnim="@android:anim/slide_in_left" />
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.myapplication.Fragment2"
+        android:id="@+id/addFragment"
+        android:name="com.example.myapplication.add.AddFragment"
         android:label="fragment_2"
         tools:layout="@layout/fragment_2" >
         <action
-            android:id="@+id/action_fragment2_to_fragment1"
-            app:destination="@id/fragment1"
-            app:enterAnim="@android:anim/slide_out_right" />
-        <argument
-            android:name="message"
-            app:argType="string" />
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>
