@@ -21,17 +21,17 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment1, container, false)
-        val recyclerView = view.recyclerView
-        val adapter = listAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        mViewModel = ViewModelProvider(this)[UserViewModel::class.java]
-        mViewModel.readAllData.observe(viewLifecycleOwner) { user ->
-            adapter.setData(user)
-        }
-        view.floatingActionButton.setOnClickListener{
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
+//        val recyclerView = view.recyclerView
+//        val adapter = listAdapter()
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        mViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+//        mViewModel.readAllData.observe(viewLifecycleOwner) { user ->
+//            adapter.setData(user)
+//        }
+//        view.floatingActionButton.setOnClickListener{
+//            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+//        }
 
 
         return view

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "557859569227",
+    "project_id": "fragments-e108a",
+    "storage_bucket": "fragments-e108a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557859569227:android:c59a9810bb4ef4a48e97ce",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557859569227-5blaltr22v2t3im5m0kecj6d30ei6382.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "ca1d6cc9b1a5dcc46af24f4ecd88fa29175009fc"
+          }
+        },
+        {
+          "client_id": "557859569227-nmrehsfuahod5k0d0bu5a2hbt5ggvl1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd9Xa-ZttxS9O_fx6RV9FkyfeOUxQzukI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557859569227-nmrehsfuahod5k0d0bu5a2hbt5ggvl1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
